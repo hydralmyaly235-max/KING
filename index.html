@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#020604">
+<title>KING</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#000;min-height:100%;font-family:Tahoma,Arial,sans-serif}
+body{overflow-x:hidden}
+.stage{position:relative;width:min(100vw,684px);margin:0 auto;line-height:0}
+.reference{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
+/* Invisible interaction layer: coordinates follow the supplied reference image exactly. */
+.hit{position:absolute;display:block;cursor:pointer;background:transparent;border:0;padding:0;z-index:3}
+.hit:focus-visible{outline:2px solid #19ff68;outline-offset:-2px}
+/* These boxes map to the three visible cards in the reference. */
+.bot{left:6.5%;right:6.5%;top:34.15%;height:7.0%}
+.gift{left:6.5%;right:6.5%;top:40.9%;height:7.0%}
+.dev{left:6.5%;right:6.5%;top:47.65%;height:7.0%}
+/* very light cyber scan/glow, without changing the screenshot itself */
+.stage::after{
+ content:"";position:fixed;inset:0;pointer-events:none;z-index:4;
+ background:linear-gradient(180deg,transparent 0%,rgba(25,255,105,.025) 49%,transparent 50%,transparent 100%);
+ background-size:100% 220px;animation:scan 7s linear infinite;
+ mix-blend-mode:screen;
+}
+@keyframes scan{from{background-position:0 -220px}to{background-position:0 100vh}}
+/* modal */
+.modal{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:18px;
+background:rgba(0,4,2,.82);backdrop-filter:blur(5px);opacity:0;visibility:hidden;transition:.25s}
+.modal.open{opacity:1;visibility:visible}
+.box{width:min(92vw,560px);position:relative;padding:34px 25px 25px;border:2px solid #19ff68;border-radius:14px;
+background:linear-gradient(145deg,rgba(0,19,10,.97),rgba(0,4,2,.98));
+box-shadow:0 0 14px rgba(25,255,105,.6),0 0 45px rgba(25,255,105,.22),inset 0 0 25px rgba(25,255,105,.08);
+transform:translateY(18px) scale(.96);transition:.28s}
+.modal.open .box{transform:none}
+.box:before{content:"";position:absolute;inset:8px;border:1px solid rgba(25,255,105,.45);border-radius:9px;pointer-events:none}
+.box h2{margin:0 0 22px;text-align:center;color:#19ff68;font-size:25px;line-height:1.2;text-shadow:0 0 12px rgba(25,255,105,.7)}
+.box p{margin:0;color:#effff4;text-align:center;line-height:2;font-size:18px;font-weight:700}
+.close{display:block;margin:24px auto 0;border:1px solid #19ff68;border-radius:8px;background:#19ff68;color:#001c0a;
+font-weight:900;padding:10px 27px;cursor:pointer;box-shadow:0 0 15px rgba(25,255,105,.45);transition:.2s}
+.close:hover{transform:translateY(-2px);box-shadow:0 0 25px rgba(25,255,105,.8)}
+@media (min-width:685px){.stage{box-shadow:0 0 80px rgba(25,255,105,.08)}}
+</style>
+</head>
+<body>
+<main class="stage">
+<img class="reference" src="assets/reference.png" alt="KING">
+<a class="hit bot" href="https://t.me/King1500hackBOT" target="_blank" rel="noopener" aria-label="بوت تلجرام مالتي"></a>
+<button class="hit gift" id="gift" aria-label="الهدية الملكية"></button>
+<a class="hit dev" href="https://t.me/FXK_I" target="_blank" rel="noopener" aria-label="تواصل مع مطور"></a>
+</main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="giftTitle">
+ <section class="box">
+  <h2 id="giftTitle">♛ الهدية الملكية ♛</h2>
+  <p>اي اداة بايثون بالك اسوي فقط راسل مطور بوت من خلال ضغط على قسم مطور في منصة</p>
+  <button class="close" id="close">إغلاق</button>
+ </section>
+</div>
+<script>
+const modal=document.getElementById('modal'), gift=document.getElementById('gift'), close=document.getElementById('close');
+function openGift(){modal.classList.add('open');document.body.style.overflow='hidden';close.focus()}
+function closeGift(){modal.classList.remove('open');document.body.style.overflow='';gift.focus()}
+gift.addEventListener('click',openGift);
+close.addEventListener('click',closeGift);
+modal.addEventListener('click',e=>{if(e.target===modal)closeGift()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))closeGift()});
+</script>
+</body>
+</html>
